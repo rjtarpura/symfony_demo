@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    {# {{ form(user_form) }} #}
+    {{ form_start(user_form) }}
+        {# {{form_label(user_form.first_name)}} #}
+        {# {{form_widget(user_form.first_name)}} #}        
+        {{form_row(user_form.first_name)}}
+    {{ form_end(user_form) }}
+
+    {{post.title}}
+    {{post.customFunctionName}}
+</div>
+{% endblock %}
