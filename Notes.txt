@@ -1,0 +1,36 @@
+Foreach Loop in Twig : 
+    {% for category in categories %}
+
+    {% else %}
+    
+    {% endfor %}
+
+Create path using route_name in Twig :
+    <a href="{{ path('category_new') }}">Create new</a>
+    action="{{ path('category_delete', {'id': category.id}) }}"
+
+Specify HTTP Method in HTML Form :
+    <input type="hidden" name="_method" value="DELETE">
+
+Include csrf token in HTML Form :
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+
+Include Content From other file in Twig :
+    {{ include('category/_form.html.twig') }}
+
+Redirect in Controller : 
+    return $this->redirectToRoute('category_index');
+
+Get Entity Manager and Save Data :
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($category);
+    $entityManager->flush();
+
+
+Console Commands :
+    php bin/console doctrine:schema:create [--dump-sql] [--force]   //Create database and tables
+    php bin/console doctrine:schema:update [--dump-sql] [--force]   //Update database changes
+    php bin/console doctrine:schema;drop //delete database
+    php bin/console make:entity [--regenerate] //Create entity or add new fields or generate getter setters
+    php bin/console debug:route //Show route list
+    
