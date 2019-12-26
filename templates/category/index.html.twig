@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Category index</h1>
 
+    {% for message in app.flashes('info') %}    {# app.flashes will return an array #}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     <table class="table">
         <thead>
             <tr>

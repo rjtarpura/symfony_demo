@@ -26,6 +26,23 @@ Get Entity Manager and Save Data :
     $entityManager->persist($category);
     $entityManager->flush();
 
+Flash Message:
+    Set (Controller)
+        $request->getSession()->getFlashBag()->add(
+            'info',
+            'Updated successfully'
+        );
+        or
+        $this->addFlash(
+            'info',
+            'Added successfully'
+        );
+    Get (Twig)
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
 
 Console Commands :
     php bin/console doctrine:schema:create [--dump-sql] [--force]   //Create database and tables
@@ -39,3 +56,4 @@ Git :
     Set username and email for current repository only (config location -> .git/config file)
     git config --local user.name "Rakesh Jangir"
     git config --local user.email "rjtarpura@gmail.com"
+

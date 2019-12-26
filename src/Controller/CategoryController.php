@@ -40,6 +40,17 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
+            
+            // $request->getSession()->getFlashBag()->add(
+            //     'info',
+            //     'Added successfully'
+            // );
+            // Both are same
+
+            $this->addFlash(
+                'info',
+                'Added successfully'
+            );
             return $this->redirectToRoute('category_index');
         }
 
@@ -69,6 +80,11 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $request->getSession()->getFlashBag()->add(
+                'info',
+                'Updated successfully'
+            );
 
             return $this->redirectToRoute('category_index');
         }
