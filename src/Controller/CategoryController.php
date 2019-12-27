@@ -104,6 +104,9 @@ class CategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
+            $this->addFlash('info','Category removed successfully.');
+        }else{
+            $this->addFlash('error','Token not matched.');
         }
 
         return $this->redirectToRoute('category_index');

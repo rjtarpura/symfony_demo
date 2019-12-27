@@ -3,9 +3,6 @@
 {% block title %}Create New Post{% endblock %}
 
 {% block body %}
-    {{ form_start(postForm,{'attr':{'id':'custom_post_form'}}) }}
-        {{ form(postForm) }}
-    {{ form_end(postForm) }}
-
+    {% include('post/_form.html.twig') %}
     <a href="{{ path('posts.list') }}">Back to List</a>
 {% endblock %}
