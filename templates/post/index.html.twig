@@ -3,5 +3,34 @@
 {% block title %}Posts{% endblock %}
 
 {% block body %}
-    Posts List
+    <h1>Posts</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.category }}</td>
+                <td>{{ post.description }}</td>
+                <td>
+                    <a href="{{ path('posts.show', {'post':post.id}) }}">Show</a>
+                     | <a href="{{ path('posts.edit', {'post':post.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('posts.create') }}">Create New Post</a>
+     | <a href="{{ path('category_index') }}">View Categories</a>
 {% endblock %}

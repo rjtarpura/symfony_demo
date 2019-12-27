@@ -44,6 +44,12 @@ Flash Message:
             </div>
         {% endfor %}
 
+Doctring
+    Relationships
+        https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/association-mapping.html
+        EntityType https://symfony.com/doc/current/reference/forms/types/entity.html
+
+
 Console Commands :
     php bin/console doctrine:schema:create [--dump-sql] [--force]   //Create database and tables
     php bin/console doctrine:schema:update [--dump-sql] [--force]   //Update database changes

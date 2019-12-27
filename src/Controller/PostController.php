@@ -18,8 +18,12 @@ class PostController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository(Post::class)->findAll();
+        
         return $this->render('post/index.html.twig', [
             'controller_name' => 'PostController',
+            'posts' => $posts,
         ]);
     }
 
@@ -44,10 +48,50 @@ class PostController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
+
+            $this->addFlash(
+                'info',
+                'Post Added successfully'
+            );
+
+            return $this->redirectToRoute('posts.list');
         }
 
         return $this->render('post/create.html.twig', [
             'postForm'  =>  $postForm->createView(),            
         ]);
+    }
+
+    /**
+     * @Route("/show/{post}", name="show", methods={"GET"})
+     */
+    public function showPost(Request $request, Post $post){
+        
+        return $this->render('post/show.html.twig',[
+            'post' => $post
+        ]);
+    }
+
+    /**
+     * @Route("/{post}", name="delete", methods={"DELETE"})
+     */
+    public function removePost(Request $request, Post $post){
+       
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($post);
+            $em->flush();
+            $this->addFlash('info','Post removed successfully.');
+        }else{
+            $this->addFlash('error','Token not matched.');
+        } 
+        return $this->redirectToRoute('posts.list');        
+    }
+
+    /**
+     * @Route("/edit/{post}", name="edit", methods={"GET","POST"})
+     */
+    public function editPost(Request $request, Post $post){
+        dd($post);
     }
 }

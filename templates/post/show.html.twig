@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+    <h1>Post</h1>
+    <table class="table">
+        <tr>
+            <td>Id</td><td>{{ post.id }}</td>
+        </tr>
+        <tr>
+            <td>Title</td><td>{{ post.title }}</td>
+        </tr>
+        <tr>
+            <td>Category</td><td>{{ post.category }}</td>
+        </tr>
+    </table>
+
+    <form method="POST" action="{{ path('posts.delete', {'post':post.id}) }}" onSubmit="return confirm('Are you sure, you want to delete this post')">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}"/>
+        <input type="submit" value="Delete Post"/>
+    </form>
+
+    <br/>
+
+    <a href="{{ path('posts.list') }}">Back to List</a>
+{% endblock %}
