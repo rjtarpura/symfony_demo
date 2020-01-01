@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PostController extends AbstractController
 {
-    /**
+    /** 
      * @Route("", name="list", methods={"GET"})
      */
     public function index()
@@ -44,7 +45,20 @@ class PostController extends AbstractController
 
         if($postForm->isSubmitted() && $postForm->isValid()){
             //Store Data
-            // var_dump($post);die;
+
+            $uploads_director = $this->getParameter('uploads_director');
+            if( $file = $request->files->get('post')['my_file'] ) {
+
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function
+
+                try {
+                    $file->move($uploads_director, $filename);
+                    $post->setFileName($filename);
+                } catch (FileException $e) {
+                    dd($e);
+                }
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
@@ -104,6 +118,20 @@ class PostController extends AbstractController
 
         if($postForm->isSubmitted() && $postForm->isValid()){
             //Update Data
+            // dd($request->files->get('post')['my_file']); //it will also work
+            $uploads_director = $this->getParameter('uploads_director');
+            if( $file = $postForm['my_file']->getData() ) {
+
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function
+
+                try {
+                    $file->move($uploads_director, $filename);
+                    $post->setFileName($filename);
+                } catch (FileException $e) {
+                    dd($e);
+                }
+            }
+
             $em = $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(

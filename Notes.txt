@@ -63,3 +63,5 @@ Git :
     git config --local user.name "Rakesh Jangir"
     git config --local user.email "rjtarpura@gmail.com"
 
+Access Parametor from services.yaml
+    $this->getParameter('parametor_name');

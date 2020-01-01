@@ -22,6 +22,10 @@
         <input type="submit" value="Delete Post"/>
     </form>
 
+    {% if(post.fileName) %}
+        {# <img src="{{ asset('uploads') }}/{{ post.fileName }}" alt="Image"/> #}
+        <img src="{{ asset('uploads/' ~ post.fileName) }}" alt="Image"/>
+    {% endif %}
     <br/>
 
     <a href="{{ path('posts.list') }}">Back to List</a>
