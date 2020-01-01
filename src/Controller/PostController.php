@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+// use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @Route("/posts", name="posts.")
  */
@@ -45,8 +46,27 @@ class PostController extends AbstractController
 
         if($postForm->isSubmitted() && $postForm->isValid()){
             //Store Data
-
+            
             $uploads_director = $this->getParameter('uploads_director');
+
+            // dd($request->files->get('post'));die;
+            //multiple file upload
+            // if( $files = $request->files->get('post')['my_file'] ) {
+
+            //     foreach ($files as $file) {
+                    
+            //         $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function
+
+            //         try {
+            //             $file->move($uploads_director, $filename);
+            //             echo $file->getClientOriginalName() . "Uploads<br/>";
+            //         } catch (FileException $e) {
+            //             dd($e);
+            //         }
+            //     }
+            // } die;
+
+            
             if( $file = $request->files->get('post')['my_file'] ) {
 
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function

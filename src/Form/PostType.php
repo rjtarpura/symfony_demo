@@ -34,7 +34,8 @@ class PostType extends AbstractType
             ->add('my_file',FileType::class,[
                 'mapped' => false,
                 'label' => 'Please upload a file',
-                'required' => false
+                'required' => false,
+                'multiple' => true,
             ])
             ->add('save',SubmitType::class,[
                 'attr'=>[
