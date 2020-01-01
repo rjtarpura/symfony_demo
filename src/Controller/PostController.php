@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\CustomService;
+use Symfony\Component\HttpFoundation\Response;
 
 // use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
@@ -15,11 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PostController extends AbstractController
 {
+    /**
+     * @Route("/see_service")
+     */
+    public function service(CustomService $cs)
+    {
+        // dd($cs->get('Rakesh'));
+        return new Response($cs->get('Rakesh'));
+    }
+
     /** 
      * @Route("", name="list", methods={"GET"})
      */
     public function index()
     {
+        // dd($this->container);
+        // dd($this->container->get(CustomService::class));
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findAll();
         
