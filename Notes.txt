@@ -84,6 +84,8 @@ ctrl+t command pallete with # (symbol in workspace)
 ctrl+shift+f global search
 ctrl+, open settings
 ctrl+r workspace change
+ctrl+~ terminal
+ctrl+l clear command terminal screen (ctrl+~)
 
 ctr+b toggle sidebar
 minimap
