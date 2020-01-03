@@ -154,14 +154,27 @@ class PostController extends AbstractController
             // dd($request->files->get('post')['my_file']); //it will also work
             $uploads_director = $this->getParameter('uploads_director');
             if( $file = $postForm['my_file']->getData() ) {
+                
+                if(is_array($file)) {
+                    foreach ($file as $f) {
+                        $filename = md5(uniqid()) . '.' . $f->guessExtension();  //php function
 
-                $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function
+                        try {
+                            $f->move($uploads_director, $filename);
+                            $post->setFileName($filename);
+                        } catch (FileException $e) {
+                            dd($e);
+                        }
+                    }
+                } else {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();  //php function
 
-                try {
-                    $file->move($uploads_director, $filename);
-                    $post->setFileName($filename);
-                } catch (FileException $e) {
-                    dd($e);
+                    try {
+                        $file->move($uploads_director, $filename);
+                        $post->setFileName($filename);
+                    } catch (FileException $e) {
+                        dd($e);
+                    }
                 }
             }
 
