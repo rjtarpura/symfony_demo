@@ -75,3 +75,16 @@ Event Listeners in Symfony
 Form component
 Form events
 Form Event and subscribers
+
+Ctrl+W close current window
+Ctrl+P command pallete (got to file)
+shift+ctrl+p commant pallete with > (show all commands)
+ctrl+shift+o command pallete with @ (symbol in file)
+ctrl+t command pallete with # (symbol in workspace)
+ctrl+shift+f global search
+ctrl+, open settings
+ctrl+r workspace change
+
+ctr+b toggle sidebar
+minimap
+activity bar
