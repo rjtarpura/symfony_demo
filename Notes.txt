@@ -86,7 +86,7 @@ ctrl+, open settings
 ctrl+r workspace change
 ctrl+~ terminal
 ctrl+l clear command terminal screen (ctrl+~)
-
+ctrl+shift+g to see git -> file changes
 ctr+b toggle sidebar
 minimap
 activity bar
